@@ -6,8 +6,8 @@ const endpoint = `http://localhost:${port}`
 
 const server = require('./server')
 
-const firstDummyData = { score: 98 }
-const secondDummyData = { score: 100 }
+const dummyRecord1 = { score: 98 }
+const dummyRecord2 = { score: 100 }
 
 tape('health', async function (t) {
   const url = `${endpoint}/health`
@@ -18,13 +18,12 @@ tape('health', async function (t) {
   })
 })
 
-// For put student test
-tape('PUT student test', async function (t) {
+tape('PUT student record test', async function (t) {
   t.plan(2)
 
   const url = `${endpoint}/rn1abu8/courses/calculus/quizzes/ye0ab61`
  
-  jsonist.put(url, firstDummyData, (err, body) => {
+  jsonist.put(url, dummyRecord1, (err, body) => {
     if (err) t.error(err)
     const expectedResult = {
       'courses': {
@@ -40,7 +39,7 @@ tape('PUT student test', async function (t) {
     t.deepEqual(body, expectedResult, 'should be passed successfully')
   })
 
-  jsonist.put(url, secondDummyData, (err, body) => {
+  jsonist.put(url, dummyRecord2, (err, body) => {
     if (err) t.error(err)
     const expectedResult = {
       'courses': {
@@ -57,8 +56,7 @@ tape('PUT student test', async function (t) {
   })
 })
 
-// For geting student test
-tape('GET student test', async function (t) {
+tape('GET student record test', async function (t) {
   t.plan(6)
   let url = `${endpoint}/rn1abu9/courses/calculus/quizzes`
   jsonist.get(url, (err, body, res) => {
